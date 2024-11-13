@@ -1,0 +1,62 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="laba.MainPage"
+             Title="Лабораторна робота 2">
+    <ContentPage.Content>
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label Text="Лабораторна робота 2"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   Grid.Row="0" />
+
+            <!-- StackLayout for horizontal button arrangement -->
+            <StackLayout Orientation="Horizontal" Spacing="10" Grid.Row="1">
+                <Entry x:Name="searchField" Placeholder="Введіть значення для пошуку" WidthRequest="200" HeightRequest="50" Margin="0,0,10,0" />
+                <Button Text="Пошук" Clicked="OnSearchClicked" BackgroundColor="#E5C0FF" TextColor="Black" />
+                <Button Text="SAX Parsing" Clicked="OnSaxParsingClicked" BackgroundColor="#E5C0FF" TextColor="Black" />
+                <Button Text="DOM Parsing" Clicked="OnDomParsingClicked" BackgroundColor="#E5C0FF" TextColor="Black" />
+                <Button Text="LINQ Parsing" Clicked="OnLinqParsingClicked" BackgroundColor="#E5C0FF" TextColor="Black" />
+                <Button Text="Transform to HTML" Clicked="OnTransformToHtmlClicked" BackgroundColor="#E5C0FF" TextColor="Black" />
+                <Button Text="Clear" Clicked="OnClearClicked" BackgroundColor="#E5C0FF" TextColor="Black" />
+                <Button Text="Exit" Clicked="OnExitClicked" BackgroundColor="#E5C0FF" TextColor="Black" />
+            </StackLayout>
+
+            <!-- ListView for search results -->
+            <ListView x:Name="resultsTable" Grid.Row="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="20" />
+                                <Label Text="{Binding Faculty, StringFormat='Факультет: {0}'}" />
+                                <Label Text="{Binding EducationLevel, StringFormat='Рівень освіти: {0}'}" />
+                                <Label Text="{Binding Course, StringFormat='Курс: {0}'}" />
+                                <Label Text="{Binding AverageRating, StringFormat='Рейтинг (середнє): {0:F1}'}" FontAttributes="Italic" Margin="0,10,0,5" />
+
+                                <Label Text="Предмети та оцінки:" FontAttributes="Bold" Margin="0,10,0,5" />
+                                <ListView ItemsSource="{Binding Subjects}" HasUnevenRows="True">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{Binding Name}" WidthRequest="150" />
+                                                    <Label Text="{Binding Grade, StringFormat='Оцінка: {0}'}" />
+                                                </StackLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
